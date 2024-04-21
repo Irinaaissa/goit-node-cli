@@ -35,17 +35,16 @@ async function removeContact(contactId) {
     if (index === -1) {
       return null;
     }
-    const removeContact = contacts[index];
-    const newContact = [
-      ...contacts.slice(0, index),
-      ...contacts.slice(index + 1),
-    ];
-    await fs.writeFile(newContact, JSON.stringify(contacts, null, 2));
-    return removeContact;
+    else {
+      const deletedData = contacts.splice(index, 1)[0];
+      await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+      return deletedData;
+       }
   } catch (error) {
     return null;
   }
 }
+
 
 async function addContact(name, email, phone) {
   try {
